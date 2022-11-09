@@ -12,6 +12,11 @@ In the VS Code terminal type:
 `pip install pydub`
 Wait until install finshes, then run/use code.
 
+**For the micSound library, you must install sounddevice.**
+In the VS Code terminal type:
+`pip install sounddevice`
+Wait until install finshes, then run/use code.
+
 ## How to use this code
 1. TRY FIRST - Sure, you can come here and look at and copy the code and produce the goals that you want, but you're taking this class to UNDERSTAND how to code. So try to meet the pseudocode goals, THEN look at/copy the parts needed to fix any errors.
 2. ASK QUESTIONS - If there's part of the code you don't understand, or if we implemented a solution differently than you, ask about it! Bad programmers use code they don't understand! Don't be a bad programmer.
