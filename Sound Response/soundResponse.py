@@ -19,7 +19,7 @@ The sound file associated with this script (tech.wav) has a commons license.
 
 """
 from pydub import AudioSegment
-from pydub.playback import _play_with_simpleaudio as Play
+# from pydub.playback import _play_with_simpleaudio as Play
 import pygame.mixer as mixer
 import time
 import numpy as np
