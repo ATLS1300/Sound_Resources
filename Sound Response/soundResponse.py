@@ -20,14 +20,19 @@ The sound file associated with this script (tech.wav) has a commons license.
 """
 from pydub import AudioSegment
 from pydub.playback import _play_with_simpleaudio as Play
-import time, os
+import pygame.mixer as mixer
+import time
 import numpy as np
+mixer.init()
 
 fps = 60 #graphics rate
 
 class Ctrlr:
+    """Sound Controller
+    Pass in filename with extension as string. Works with .wav and .mp3."""
     def __init__(self,filename='tech.wav',fps=60,startOnInst=False):
-        self.sound = AudioSegment.from_file(filename) #replace string with YOUR filename with extension (works with wav and mp3)
+        self.sound = AudioSegment.from_file(filename) 
+        self.mixer = mixer.music.load(filename) # plays sound
         self.fps = fps # needed for frequency calculation. update if using a different animation speed (like 30 fps)
         self.samples = self.sound.get_array_of_samples() #puts the sound file into a numpy array, for manipulation
         self.bitrate = 1/(self.sound.duration_seconds/len(self.samples)) # samplerate (bitrate) of pydub sound, in Hz
@@ -35,12 +40,18 @@ class Ctrlr:
             self.start()
         
     def start(self):
-        '''Plays corresponding sound. To play multiple sounds from multiple objects,
-        change the channel index. The default number of pygame sound channels is 16.
-        You can continually play 16 sounds at once.'''
+        '''Plays corresponding sound. Only plays one at a time.'''
         
-        Play(self.sound)
+        mixer.music.play()
+        self.startTime()
+        
+    def startTime(self):
+        '''Starts time, like a stopwatch. Will reset time if called multiple times.'''
         self.start_time = time.time() # gets the time when the sound starts playing.
+
+    def stop(self):
+        '''Stops playing music. '''
+        mixer.music.stop()
    
     def getCurrAmp(self):
         '''Gets the amount of time that has passed since the song started playing
