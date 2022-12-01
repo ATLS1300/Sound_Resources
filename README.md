@@ -3,7 +3,7 @@
 This repository stores **modules** (also called libraries). You can download the module and import it as you would other libraries. 
 The module file (.py) and sound file (.wav, .mp3) **must be in the same folder as your VS Code working folder and script.**
 
-Example code demonstrates use. 
+Example code demonstrates use. There is a video walking through the SR_pygameExample.py
 
 ## Importing modules does not count as borrowed code.
 
