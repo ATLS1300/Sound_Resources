@@ -1,4 +1,5 @@
 import micSound
+import math
 import turtle
     
 def instruct():
@@ -36,18 +37,23 @@ def parrot(theta,scale=50):
         
 def main():     
     # LIBRARY USE
-    f=-10800
-    makeStream()
+    micSound.makeStream()
+    threshold = 0.3 # threshold forr doing sound-related activities. Tweak this value!
     
     # turtle stuff
     turtle.Screen().bgcolor('darkmagenta')
-    instruct()
+    instruct() # draws instructions on screen
     running = True
-    
-    while running:
-        chunk = sample(stream,10000) # LIBRARY USE
+    f=-10800
 
-        if max(abs(chunk[0])) >= 0.3:
+    while running:
+        chunk = micSound.sample(micSound.stream,10000) # gets amplitude from microphone  stream
+
+        if max(abs(chunk[0])) >= threshold:
+            # if the absolute value of loudness is greater than a threshold...
+            # lower threshold valuues => detect quieter sounds. 
+            # 0.3 good for clapping, blowing on mic, snapping
+            
             f = parrot(f)
             if f >= 10800:
                 turtle.ht()
@@ -55,6 +61,6 @@ def main():
                 running = False
     turtle.mainloop()
     
-    cleanup(stream) # LIBRARY USE
+    micSound.cleanup(micSound.stream) # Always call at the end!
     
 main()
